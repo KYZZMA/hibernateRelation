@@ -44,7 +44,7 @@ public class UniversityService {
     public List<Teacher> allTeacher(){
 
 
-       String jpql = "SELECT c FROM Teacher c";
+       String jpql = "SELECT c FROM Course c";
 
         TypedQuery<Teacher> query = entityManager.createQuery(jpql, Teacher.class);
 

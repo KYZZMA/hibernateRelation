@@ -1,5 +1,6 @@
 package com.example.hibernateRelation.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,8 +15,10 @@ public class Teacher {
     @Column(name="NAME_TEACHER")
     private String nameTeacher;
 
-//    @OneToMany(mappedBy = "teacher")
-//    private List<Course> courses;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "teacher")
+    private List<Course> courses;
 
 
 
@@ -35,11 +38,11 @@ public class Teacher {
         this.nameTeacher = nameTeacher;
     }
 
-//    public List<Course> getCourses() {
-//        return courses;
-//    }
-//
-//    public void setCourses(List<Course> courses) {
-//        this.courses = courses;
-//    }
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
 }
