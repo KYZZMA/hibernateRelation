@@ -2,6 +2,7 @@ package com.example.hibernateRelation.controller;
 
 import com.example.hibernateRelation.entity.Course;
 import com.example.hibernateRelation.entity.Student;
+import com.example.hibernateRelation.entity.Teacher;
 import com.example.hibernateRelation.service.UniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,5 +22,9 @@ public class UniversityController {
     public List<Student> allStudent(){
         return universityService.allStudent();
     }
+    @GetMapping("/allTeacher")
+        public List<Teacher> allTeacher(){
+            return universityService.allTeacher();
+        }
 
 }

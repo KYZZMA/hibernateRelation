@@ -2,6 +2,7 @@ package com.example.hibernateRelation.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,7 +15,27 @@ public class Course {
     @Column(name="NAME_COURSE")
     private String nameCourse;
 
-//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
+
+    @ManyToMany
+    @JoinTable(name = "StudentCourse",
+            joinColumns = @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID")
+    )
+    private List<Student> students;
+
+//    @ManyToOne
+//    @JoinColumn(name = "teacher_id")
+//    private Teacher teacher;
+//
+//    public Teacher getTeacher() {
+//        return teacher;
+//    }
+//
+//    public void setTeacher(Teacher teacher) {
+//        this.teacher = teacher;
+//    }
+
+    //    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
 //    private Set<Student> students;
 
     public Integer getId() {
