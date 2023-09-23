@@ -1,0 +1,12 @@
+@startuml
+class com.example.hibernateRelation.entity.Student {
+- Integer id
+- String nameStudent
+- Set<Course> courses
+}
+class com.example.hibernateRelation.entity.Course {
+- Integer id
+- String nameCourse
+- Set<Student> students
+}
+@enduml
