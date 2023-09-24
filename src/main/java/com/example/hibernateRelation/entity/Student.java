@@ -22,6 +22,18 @@ public class Student {
     )
     private List<Course> courses;
 
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
     public Integer getId() {
         return id;
     }

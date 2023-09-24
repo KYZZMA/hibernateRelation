@@ -26,6 +26,13 @@ VALUES ('Александр Олкгович'),
        ('Дмитрий Николаевич'),
        ('Светлана Николаевна');
 
+insert into student ("id",teacher_id)
+values (1,1);
+
+UPDATE student
+SET teacher_id = 2
+WHERE "id" = 1
+
 INSERT INTO student_course (student_id, course_id)
 VALUES (1,6),
        (1,7),
@@ -34,4 +41,4 @@ VALUES (1,6),
        (3,9),
        (4,10);
 
-DELETE FROM course WHERE "id" = 12
+DELETE FROM student WHERE "id" = 5

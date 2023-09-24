@@ -1,23 +1,14 @@
 package com.example.hibernateRelation.service;
 
-import com.example.hibernateRelation.entity.Course;
 import com.example.hibernateRelation.entity.Student;
-import com.example.hibernateRelation.entity.StudentDao;
 import com.example.hibernateRelation.entity.Teacher;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class UniversityService {
@@ -44,7 +35,7 @@ public class UniversityService {
     public List<Teacher> allTeacher(){
 
 
-       String jpql = "SELECT c FROM Course c";
+       String jpql = "SELECT c FROM Teacher c";
 
         TypedQuery<Teacher> query = entityManager.createQuery(jpql, Teacher.class);
 
