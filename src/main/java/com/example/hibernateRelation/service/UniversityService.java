@@ -20,10 +20,10 @@ public class UniversityService {
     public List<Student> allStudent(){
 
 //       String jpql = "SELECT c FROM StudentCourse c";
-       String jpql = "SELECT c FROM Student c";
+//       String jpql = "SELECT c FROM Course c";
 //        String jpql = "SELECT c FROM Student c WHERE id = 1";
 //        String jpql = "select student_id from list_student_on_course group by student_id";
-//        String jpql = "select studentId from StudentCourse GROUP BY studentId HAVING COUNT(studentId)=1";
+        String jpql = "select studentId from StudentCourse GROUP BY studentId HAVING COUNT(studentId)=1";
 //        select student_id from student_course GROUP BY student_id HAVING COUNT(student_id)=1
         TypedQuery<Student> query = entityManager.createQuery(jpql, Student.class);
 

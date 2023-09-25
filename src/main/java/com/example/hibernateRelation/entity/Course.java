@@ -16,24 +16,32 @@ public class Course {
     private String nameCourse;
 
 
-//    @ManyToMany
-//    @JoinTable(name = "StudentCourse",
-//            joinColumns = @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID"),
-//            inverseJoinColumns = @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID")
-//    )
-//    private List<Student> students;
+    @ManyToMany
+    @JoinTable(name = "StudentCourse",
+            joinColumns = @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID")
+    )
+    private List<Student> students;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id")
-    private Teacher teacher;
-
-    public Teacher getTeacher() {
-        return teacher;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
+
+//    @ManyToOne
+//    @JoinColumn(name = "teacher_id")
+//    private Teacher teacher;
+//
+//    public Teacher getTeacher() {
+//        return teacher;
+//    }
+//
+//    public void setTeacher(Teacher teacher) {
+//        this.teacher = teacher;
+//    }
 
     public Integer getId() {
         return id;

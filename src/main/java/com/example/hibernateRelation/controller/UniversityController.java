@@ -18,7 +18,7 @@ public class UniversityController {
     @Autowired
     UniversityService universityService;
 
-    @GetMapping("/allStudent")
+    @GetMapping("/oneStudentByOneCourse")
     public List<Student> allStudent(){
         return universityService.allStudent();
     }

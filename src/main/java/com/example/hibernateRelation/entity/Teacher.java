@@ -16,24 +16,41 @@ public class Teacher {
     private String nameTeacher;
 
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "teacher")
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "teacher")
+//    private List<Course> courses;
+
+    @ManyToMany
+    @JoinTable(name = "TeacherCourse",
+            joinColumns = @JoinColumn(name = "TEACHER_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID")
+    )
     private List<Course> courses;
 
-//    @ManyToMany
-//    @JoinTable(name = "TeacherStudent",
-//            joinColumns = @JoinColumn(name = "TEACHER_ID", referencedColumnName = "ID"),
-//            inverseJoinColumns = @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID")
-//    )
-//    private List<Student> students;
-//
-//    public List<Student> getStudents() {
-//        return students;
-//    }
-//
-//    public void setStudents(List<Student> students) {
-//        this.students = students;
-//    }
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "TeacherStudent",
+            joinColumns = @JoinColumn(name = "TEACHER_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID")
+    )
+    private List<Student> students;
+
+
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
 
     public Integer getId() {
         return id;
@@ -51,11 +68,11 @@ public class Teacher {
         this.nameTeacher = nameTeacher;
     }
 
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
+//    public List<Course> getCourses() {
+//        return courses;
+//    }
+//
+//    public void setCourses(List<Course> courses) {
+//        this.courses = courses;
+//    }
 }
