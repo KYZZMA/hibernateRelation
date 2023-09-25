@@ -40,5 +40,13 @@ VALUES (1,6),
        (2,6),
        (3,9),
        (4,10);
+INSERT INTO teacher_student (student_id, teacher_id)
+VALUES (1,1),
+       (1,2),
+       (2,1),
+       (2,2),
+       (3,3),
+       (4,3);
 
 DELETE FROM student WHERE "id" = 5
+

@@ -22,16 +22,19 @@ public class Student {
     )
     private List<Course> courses;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id")
-    private Teacher teacher;
+    @ManyToMany
+    @JoinTable(name = "TeacherStudent",
+            joinColumns = @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "TEACHER_ID", referencedColumnName = "ID")
+    )
+    private List<Teacher> teachers;
 
-    public Teacher getTeacher() {
-        return teacher;
+    public List<Teacher> getTeachers() {
+        return teachers;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
     }
 
     public Integer getId() {
