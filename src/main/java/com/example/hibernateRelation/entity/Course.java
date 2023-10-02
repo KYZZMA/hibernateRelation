@@ -9,53 +9,40 @@ import java.util.Set;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "courseid")
+    private Integer courseId;
 
-    @Column(name="NAME_COURSE")
-    private String nameCourse;
-
+    @Column(name = "coursename")
+    private String courseName;
 
     @ManyToMany
-    @JoinTable(name = "StudentCourse",
-            joinColumns = @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID")
+    @JoinTable(name = "course_student",
+            joinColumns = @JoinColumn(name = "courseid", referencedColumnName = "courseId"),
+            inverseJoinColumns = @JoinColumn(name = "studentid", referencedColumnName = "studentId")
     )
-    private List<Student> students;
+    private Set<Student> students;
 
-    public List<Student> getStudents() {
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public Set<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(Set<Student> students) {
         this.students = students;
-    }
-
-//    @ManyToOne
-//    @JoinColumn(name = "teacher_id")
-//    private Teacher teacher;
-//
-//    public Teacher getTeacher() {
-//        return teacher;
-//    }
-//
-//    public void setTeacher(Teacher teacher) {
-//        this.teacher = teacher;
-//    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNameCourse() {
-        return nameCourse;
-    }
-
-    public void setNameCourse(String nameCourse) {
-        this.nameCourse = nameCourse;
     }
 }

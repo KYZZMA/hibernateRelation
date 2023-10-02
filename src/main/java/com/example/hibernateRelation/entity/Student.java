@@ -9,55 +9,25 @@ import java.util.Set;
 public class Student {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "studentid")
+    private Integer studentId;
 
-    @Column(name="NAME_STUDENT")
-    private String nameStudent;
+    @Column(name = "studentname")
+    private String studentName;
 
-//    @ManyToMany
-//    @JoinTable(name = "StudentCourse",
-//            joinColumns = @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID"),
-//            inverseJoinColumns = @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID")
-//    )
-//    private List<Course> courses;
-
-//    @ManyToMany
-//    @JoinTable(name = "TeacherStudent",
-//            joinColumns = @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID"),
-//            inverseJoinColumns = @JoinColumn(name = "TEACHER_ID", referencedColumnName = "ID")
-//    )
-//    private List<Teacher> teachers;
-//
-//    public List<Teacher> getTeachers() {
-//        return teachers;
-//    }
-//
-//    public void setTeachers(List<Teacher> teachers) {
-//        this.teachers = teachers;
-//    }
-
-    public Integer getId() {
-        return id;
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
-    public String getNameStudent() {
-        return nameStudent;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setNameStudent(String nameStudent) {
-        this.nameStudent = nameStudent;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
-
-//    public List<Course> getCourses() {
-//        return courses;
-//    }
-//
-//    public void setCourses(List<Course> courses) {
-//        this.courses = courses;
-//    }
 }
