@@ -1,37 +1,70 @@
-
-create table students
+create table student
 (
-	StudentID int primary key,
-	NAME_STUDENT varchar(128) not null
+	StudentId int primary key,
+	StudentName varchar not null
 )
 
--- Заполним таблицу Employee данными.
-insert into students(StudentID, NAME_STUDENT) values (1, N'John Smith')
-insert into students(StudentID, NAME_STUDENT) values (2, N'Hilary White')
-insert into students(StudentID, NAME_STUDENT) values (3, N'Emily Brown')
+insert into student(StudentId,StudentName) values (1,'Саша')
+insert into student(StudentId,StudentName) values (2,'Дима')
+insert into student(StudentId,StudentName) values (3,'Паша')
+insert into student(StudentId,StudentName) values (4,'Маша')
+insert into student(StudentId,StudentName) values (5,'Коля')
+insert into student(StudentId,StudentName) values (6,'Володя')
+insert into student(StudentId,StudentName) values (7,'Сергей')
 
-
-create table courses
+create table teacher
 (
-	CourseID int primary key,
-	NAME_COURSE varchar(128) not null
+	TeacherId int primary key,
+	TeacherName varchar not null
 )
 
--- Заполним таблицу Position данными.
-insert into courses(CourseID, NAME_COURSE) values(1, N'матанализ')
-insert into courses(CourseID, NAME_COURSE) values(2, N'экономика')
-insert into courses(CourseID, NAME_COURSE) values(3, N'информатика')
+insert into teacher(TeacherId,TeacherName) values (1,'Александр Олегович')
+insert into teacher(TeacherId,TeacherName) values (2,'Дмитрий Николаевич')
+insert into teacher(TeacherId,TeacherName) values (3,'Светлана Николаевна')
 
-
--- Заполним таблицу EmployeesPositions данными.
-create table LIST_STUDENT_ON_COURSE
+create table course
 (
-	StudentID int foreign key references student(StudentID),
-	CourseID int foreign key references course(CourseID),
-	primary key(PositionId, EmployeeId)
+	CourseId int primary key,
+	CourseName varchar not null
 )
 
-insert into LIST_STUDENT_ON_COURSE(StudentID, CourseID) values (1, 1)
-insert into LIST_STUDENT_ON_COURSE(StudentID, CourseID) values (1, 2)
-insert into LIST_STUDENT_ON_COURSE(StudentID, CourseID) values (2, 3)
-insert into LIST_STUDENT_ON_COURSE(StudentID, CourseID) values (3, 3)
+insert into course(CourseId,CourseName) values (1,'мат. анализ')
+insert into course(CourseId,CourseName) values (2,'информатика')
+insert into course(CourseId,CourseName) values (3,'тервер')
+insert into course(CourseId,CourseName) values (4,'английский')
+insert into course(CourseId,CourseName) values (5,'история')
+
+
+create table course_student
+(
+	CourseId int references course(CourseId),
+	StudentId int references student(StudentId),
+	constraint course_student_pk primary key(CourseId, StudentId)
+)
+
+insert into course_student(CourseId, StudentId) values (1, 1)
+insert into course_student(CourseId, StudentId) values (2, 1)
+insert into course_student(CourseId, StudentId) values (1, 2)
+insert into course_student(CourseId, StudentId) values (3, 2)
+insert into course_student(CourseId, StudentId) values (3, 3)
+insert into course_student(CourseId, StudentId) values (4, 4)
+insert into course_student(CourseId, StudentId) values (1, 5)
+insert into course_student(CourseId, StudentId) values (5, 5)
+insert into course_student(CourseId, StudentId) values (3, 6)
+insert into course_student(CourseId, StudentId) values (2, 7)
+
+
+create table teacher_course
+(
+	TeacherId int references teacher(TeacherId),
+	CourseId int references course(CourseId),
+	constraint teacher_course_pk primary key(TeacherId, CourseId)
+)
+
+insert into teacher_course(TeacherId, CourseId) values (1, 1)
+insert into teacher_course(TeacherId, CourseId) values (1, 3)
+insert into teacher_course(TeacherId, CourseId) values (2, 2)
+insert into teacher_course(TeacherId, CourseId) values (2, 4)
+insert into teacher_course(TeacherId, CourseId) values (3, 2)
+insert into teacher_course(TeacherId, CourseId) values (3, 5)
+
