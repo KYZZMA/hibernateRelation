@@ -18,13 +18,19 @@ public class UniversityController {
     @Autowired
     UniversityService universityService;
 
-    @GetMapping("/oneStudentByOneCourse")
-    public List<Student> allStudent(){
-        return universityService.allStudent();
+    @GetMapping("/firstSolution")
+    public List<Object[]> firstSolution() {
+        return universityService.firstSolution();
     }
-    @GetMapping("/allTeacher")
-        public List<Teacher> allTeacher(){
-            return universityService.allTeacher();
-        }
+
+    @GetMapping("/allUniversity")
+    public List<Object[]> allUniversity() {
+        return universityService.allUniversity();
+    }
+
+    @GetMapping("/secondSolution")
+    public List<Object[]> secondSolution() {
+        return universityService.secondSolution();
+    }
 
 }

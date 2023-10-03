@@ -1,160 +1,35 @@
-INSERT INTO student (NAME_STUDENT)
-VALUES ('Вася');
-VALUES ('Миша');
-VALUES ('Саша'),
-       ('Дима'),
-       ('Паша'),
-       ('Коля');
-
-INSERT INTO course (name_course, teacher_id)
-VALUES ('тервер',1);
-VALUES ('история',1),
-       ('мат. анализ',2),
-       ('экономика',2),
-       ('экономика',3),
-       ('информатика',3);
-
-update course
-set teacher_id = 3
-where "id" = 3
-
-INSERT INTO course (course,teacher_id)
-VALUES (1,1),
-       (2,2),
-       (3,3);
-
-INSERT INTO teacher_course (teacher_id,course_id)
-VALUES (1,11);
-VALUES (1,6),
-       (2,7),
-       (2,8),
-       (3,9),
-       (3,10);
-
-
-INSERT INTO teacher (name_teacher)
-VALUES ('Александр Олкгович'),
-       ('Дмитрий Николаевич'),
-       ('Светлана Николаевна');
-
-insert into student ("id",teacher_id)
-values (1,1);
-
-UPDATE student_course
-SET course_id = 8
-WHERE "id" = 17
-
-INSERT INTO student_course (student_id, course_id)
-VALUES (8,11);
-VALUES (1,6),
-       (1,7),
-       (2,8),
-       (2,6),
-       (3,9),
-       (4,10);
-INSERT INTO teacher_student (student_id, teacher_id)
-VALUES (8,1);
-VALUES (1,1),
-       (1,2),
-       (2,1),
-       (2,2),
-       (3,3),
-       (4,3);
-
-DELETE FROM student WHERE "id" = 5
-
-
-select student_id, count(student_id)
- from student_course
-     group by student_id
-
-select student_id from student_course GROUP BY student_id HAVING COUNT(student_id)=1
-
- select student_id, course_id, count(student_id)
- from student_course
-     group by student_id, course_id
-     having count(student_id) = 1;
-
-select student_id, count(student_id)
-from teacher_student
-     group by student_id
-     having count(student_id) = 1;
-
-
-
-
-
-//Запрос на получение списка групп и количества учеников в них
-
- //вывод всех
-select teacher.teacherName, course.coursename, student.studentname
-from course_student
- join course on course_student.courseid = course.courseid
+//все
+select teacher.teacherName, course.coursename, course_student.courseid, student.studentname, course_student.studentid
+from teacher
+ join teacher_course on teacher_course.teacherid = teacher.teacherid
+ join course on teacher_course.courseid = course.courseid
+ join course_student on course_student.courseid = course.courseid
  join student on course_student.studentid = student.studentid
- left join teacher on course_student.courseid = teacher.teacherid
- GROUP BY  course.coursename, teacher.teacherName, student.studentname;
 
-// рабочий вывод без учителей
-select course.coursename, COUNT(course_student.courseid) as studentCount
-from course_student
- join course on course_student.courseid = course.courseid
- join student on course_student.studentid = student.studentid
- GROUP BY  course.coursename, course_student.courseid;
-
-select teacher.teachername, course.coursename, COUNT(course_student.courseid) as studentCount
-from course_student
- join course on course_student.courseid = course.courseid
- join student on course_student.studentid = student.studentid
- left join teacher on teacher.teacherid  = course_student.courseid
- GROUP BY   teacher.teachername,course.coursename, course_student.courseid;
-
-
-//вернуть студентов которые ходят только в одну единственную группу
-select course.coursename, student.studentname,  count(student.studentname)
-from course_student
-join course on course_student.courseid = course.courseid
-join student on course_student.studentid = student.studentid
-group by course.coursename,student.studentname
-having count(student.studentname) = 1;
-
-//рабочий без преподов
-select student.studentname,  count(student.studentname)
-from course_student
-join course on course_student.courseid = course.courseid
-join student on course_student.studentid = student.studentid
-group by student.studentname
-having count(student.studentname) = 1;
-
-
-select course.coursename, student.studentname, (
- select count(*)
-	from student
-		where student.studentid = course_student.studentid
-)
-from course_student
-join course on course_student.courseid = course.courseid
-join student on course_student.studentid = student.studentid
-
-
-//не раб с подзапросом
-select student.studentname, course.coursename
-from course_student
-join course on course_student.courseid = course.courseid
-join student on course_student.studentid =(
-	select studentid
-	from course_student
-	GROUP BY studentid
-	HAVING COUNT(studentid)=1
-)
-
-group by student.studentname, course.coursename
-
-
-select teacher.teacherName, course.coursename, course_student.courseid,COUNT(course_student.courseid) as studentCount
+ //подсчет кол-ва студентов в группах
+select teacher.teacherName, course.coursename, COUNT(course_student.courseid) as studentCount
 from teacher
  join teacher_course on teacher_course.teacherid = teacher.teacherid
  join course on teacher_course.courseid = course.courseid
  join course_student on course_student.courseid = course.courseid
  join student on student.studentid = course_student.studentid
- GROUP BY  teacher.teacherName,course.coursename, course_student.courseid;
+ GROUP BY  teacher.teacherName,course.coursename;
+
+
+//вывести группы и количество в них учеников которые ходят только в эти группы
+//(вопрос: что если один ученик ходит на один предмет, но учетеля в нем разные)
+
+//решение верное
+select course.coursename, count(course_student.courseid) as studentcount
+from course_student
+join course on course_student.courseid = course.courseid
+where course_student.studentid in
+(
+	select course_student.studentid
+from course_student
+group by course_student.studentid
+HAVING COUNT(course_student.studentid)=1
+
+)
+GROUP BY course.coursename
 

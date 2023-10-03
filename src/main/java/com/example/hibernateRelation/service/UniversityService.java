@@ -1,10 +1,8 @@
 package com.example.hibernateRelation.service;
 
-import com.example.hibernateRelation.entity.Student;
-import com.example.hibernateRelation.entity.Teacher;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -17,43 +15,60 @@ public class UniversityService {
     EntityManager entityManager;
 
     @Transactional
-    public List<Student> allStudent(){
+    public List<Object[]> firstSolution() {
 
 
-        String jpql = "select studentId from StudentCourse GROUP BY studentId HAVING COUNT(studentId)=1";
+        String jpql = "SELECT t.teacherName, c.courseName, COUNT(cs.courseId) AS studentCount " +
+                "FROM Teacher t " +
+                "join Teacher_Course tc on tc.teacherId = t.teacherId " +
+                "join Course c on tc.courseId = c.courseId " +
+                "join Course_Student cs on cs.courseId = c.courseId " +
+                "join Student s on cs.studentId = s.studentId " +
+                "GROUP BY  t.teacherName,c.courseName";
 
-        TypedQuery<Student> query = entityManager.createQuery(jpql, Student.class);
+        List<Object[]> allResults = entityManager.createQuery(jpql).getResultList();
 
-        return query.getResultList();
+        return allResults;
 
 
     }
+
     @Transactional
-    public List<Teacher> allTeacher(){
+    public List<Object[]> secondSolution() {
 
 
-//       String jpql = "SELECT c FROM Teacher c";
-//       String jpql = "select tc from Teacher_Course tc";
-       String jpql = "select c from Course c";
-//       String jpql = "SELECT t.teacherName, c.courseName FROM Teacher t join Teacher_Course tc on tc.teacherid = t.teacherid join Course c on tc.courseid = c.courseid";
+        String jpql = "SELECT c.courseName, COUNT(cs.courseId) AS studentCount " +
+                "FROM Course_Student cs " +
+                "join Course c on cs.courseId = c.courseId " +
+                "WHERE cs.studentId IN " +
+                "( " +
+                "SELECT cs.studentId " +
+                "FROM Course_Student cs " +
+                "GROUP BY cs.studentId " +
+                "HAVING COUNT(cs.studentId)=1 " +
+                ") " +
+                "GROUP BY c.courseName";
 
-       //select teacher.teacherName, course.coursename
-        //from teacher
-        // join teacher_course on teacher_course.teacherid = teacher.teacherid
-        //join course on teacher_course.courseid = course.courseid
+        List<Object[]> allResults = entityManager.createQuery(jpql).getResultList();
 
-       //select teacher.teacherName, course.coursename, course_student.courseid, student.studentname, course_student.studentid
-        //from teacher
-        // join teacher_course on teacher_course.teacherid = teacher.teacherid
-        // join course on teacher_course.courseid = course.courseid
-        // join course_student on course_student.courseid = course.courseid
-        // join student on course_student.studentid = student.studentid
-        //
+        return allResults;
 
-        TypedQuery<Teacher> query = entityManager.createQuery(jpql, Teacher.class);
 
-        return query.getResultList();
+    }
 
+    @Transactional
+    public List<Object[]> allUniversity() {
+
+        String jpql = "SELECT t.teacherName, c.courseName, s.studentName " +
+                "FROM Teacher t " +
+                "join Teacher_Course tc on tc.teacherId = t.teacherId " +
+                "join Course c on tc.courseId = c.courseId " +
+                "join Course_Student cs on cs.courseId = c.courseId " +
+                "join Student s on cs.studentId = s.studentId";
+
+        List<Object[]> allResults = entityManager.createQuery(jpql).getResultList();
+
+        return allResults;
 
     }
 

@@ -2,10 +2,10 @@ package com.example.hibernateRelation.entity;
 
 import jakarta.persistence.*;
 
-@Embeddable
+@Entity
 @Table(name = "teacher_course")
 public class Teacher_Course {
-
+    @Id
     @Column(name = "teacherid")
     private Integer teacherId;
 

@@ -15,6 +15,7 @@ public class Student {
     @Column(name = "studentname")
     private String studentName;
 
+
     public Integer getStudentId() {
         return studentId;
     }
