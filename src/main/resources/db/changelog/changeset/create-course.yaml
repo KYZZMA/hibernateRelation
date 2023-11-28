@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-course
+      author: Alexander
+      changes:
+        - createTable:
+            tableName: course
+            columns:
+              - column:
+                  name: courseid
+                  type: int
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: coursename
+                  type: varchar
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: insert-course
+      author: Alexander
+      changes:
+        - insert:
+            tableName: course
+            columns:
+              - column:
+                  name: courseid
+                  value: 1
+              - column:
+                  name: coursename
+                  value: мат. анализ
+        - insert:
+            tableName: course
+            columns:
+              - column:
+                  name: courseid
+                  value: 2
+              - column:
+                  name: coursename
+                  value: информатика
+        - insert:
+            tableName: course
+            columns:
+              - column:
+                  name: courseid
+                  value: 3
+              - column:
+                  name: coursename
+                  value: тервер
+        - insert:
+            tableName: course
+            columns:
+              - column:
+                  name: courseid
+                  value: 4
+              - column:
+                  name: coursename
+                  value: английский
+        - insert:
+            tableName: course
+            columns:
+              - column:
+                  name: courseid
+                  value: 5
+              - column:
+                  name: coursename
+                  value: история

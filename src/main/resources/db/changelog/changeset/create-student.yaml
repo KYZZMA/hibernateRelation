@@ -1,0 +1,136 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-student
+      author: Alexander
+      changes:
+        - createTable:
+            tableName: student
+            columns:
+              - column:
+                  name: StudentId
+                  type: int
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: StudentName
+                  type: varchar
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: insertAll2-create-student
+      author: Alexander
+      changes:
+        - insert:
+            tableName: student
+            columns:
+              - column:
+                  name: studentid
+                  value: 1
+              - column:
+                  name: studentname
+                  value: Саша
+        - insert:
+            tableName: student
+            columns:
+              - column:
+                  name: studentid
+                  value: 2
+              - column:
+                  name: studentname
+                  value: Дима
+        - insert:
+            tableName: student
+            columns:
+              - column:
+                  name: studentid
+                  value: 3
+              - column:
+                  name: studentname
+                  value: Паша
+        - insert:
+            tableName: student
+            columns:
+              - column:
+                  name: studentid
+                  value: 4
+              - column:
+                  name: studentname
+                  value: Маша
+        - insert:
+            tableName: student
+            columns:
+              - column:
+                  name: studentid
+                  value: 5
+              - column:
+                  name: studentname
+                  value: Коля
+        - insert:
+            tableName: student
+            columns:
+              - column:
+                  name: studentid
+                  value: 6
+              - column:
+                  name: studentname
+                  value: Володя
+        - insert:
+            tableName: student
+            columns:
+              - column:
+                  name: studentid
+                  value: 7
+              - column:
+                  name: studentname
+                  value: Сергей
+
+
+
+#      insert:
+#        tableName: student
+#        columns:
+#          - column:
+#              name: studentid
+#              value: 1
+#          - column:
+#              name: studentname
+#              value: Саша
+#      insert:
+#        tableName: student
+#        columns:
+#          - column:
+#              name: studentid
+#              value: 2
+#          - column:
+#              name: studentname
+#              value: Дима
+#          - column:
+#              name: studentid
+#              value: 3
+#          - column:
+#              name: studentname
+#              value: Паша
+#          - column:
+#              name: studentid
+#              value: 4
+#          - column:
+#              name: studentname
+#              value: Маша
+#          - column:
+#              name: studentid
+#              value: 5
+#          - column:
+#              name: studentname
+#              value: Коля
+#          - column:
+#              name: studentid
+#              value: 6
+#          - column:
+#              name: studentname
+#              value: Володя
+#          - column:
+#              name: studentid
+#              value: 7
+#          - column:
+#              name: studentname
+#              value: Сергей

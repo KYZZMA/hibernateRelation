@@ -1,0 +1,49 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-teacher
+      author: Alexander
+      changes:
+        - createTable:
+            tableName: teacher
+            columns:
+              - column:
+                  name: teacherid
+                  type: int
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: teachername
+                  type: varchar
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: insert-teacher
+      author: Alexander
+      changes:
+        - insert:
+            tableName: teacher
+            columns:
+              - column:
+                  name: teacherid
+                  value: 1
+              - column:
+                  name: teachername
+                  value: Александр Олегович
+        - insert:
+            tableName: teacher
+            columns:
+              - column:
+                  name: teacherid
+                  value: 2
+              - column:
+                  name: teachername
+                  value: Дмитрий Николаевич
+        - insert:
+            tableName: teacher
+            columns:
+              - column:
+                  name: teacherid
+                  value: 3
+              - column:
+                  name: teachername
+                  value: Светлана Николаевна

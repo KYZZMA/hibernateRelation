@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: change-column-StudentId-StudentName
+      author: Alexander
+      changes:
+        - renameColumn:
+            tableName: student
+            newColumnName: studentid
+            oldColumnName: StudentId
+        - renameColumn:
+            tableName: student
+            newColumnName: studentname
+            oldColumnName: StudentName
